@@ -1,0 +1,13 @@
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "parser": "babel-eslint",
+    "endOfLine": "auto"
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}

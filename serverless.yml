@@ -1,0 +1,31 @@
+service: serverless-azure-functions-generate-pdf-2
+
+provider:
+  name: azure
+  runtime: nodejs12
+  region: ${opt:region, 'North Europe'}
+  stage: ${opt:stage, 'dev'}
+
+plugins:
+  - serverless-azure-functions
+  - serverless-webpack
+
+package:
+  exclude:
+    - local.settings.json
+    - .vscode/**
+
+functions:
+  generatePdf:
+    handler: src/handlers/index.handler
+    events:
+      - http: true
+        x-azure-settings:
+          name: req
+          methods:
+            - post
+          authLevel: anonymous
+      - http: true
+        x-azure-settings:
+          name: res
+          direction: out
