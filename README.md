@@ -13,7 +13,7 @@ To do this you'll need to:
 **Stack**
 
 - [Serverless Framework](https://www.serverless.com)
-- [Azure Functions](https://azure.microsoft.com/en-us/services/functions/) + [API Management](https://azure.microsoft.com/en-us/services/api-management/) + [Azure Storage](https://azure.microsoft.com/en-us/services/storage/) (for storing the functions, fonts and documents)
+- [Azure Functions](https://azure.microsoft.com/en-us/services/functions/) + [Azure Storage](https://azure.microsoft.com/en-us/services/storage/) (for storing the functions, fonts and documents)
 - [Webpack](https://webpack.js.org) for bundling and optimizing
 - [Babel](https://babeljs.io) for transpiling files
 - [Typescript](https://www.typescriptlang.org) so we can write better code
@@ -26,7 +26,7 @@ Install dependencies with `npm install` or `yarn add`.
 
 Located at `src/domain/config/config.ts`.
 
-You will need to provide asdf and asdf.
+You will need to provide `STORAGE_ACCOUNT_KEY` and `AZURE_STORAGE_CONNECTION_STRING` for your Azure Storage.
 
 ## Log in to Azure
 
@@ -42,7 +42,7 @@ Run `sls offline`. After a bit of building files and doing its magic, you get a 
 ```
 Http Functions:
 
-generatePdf: [POST] http://localhost:7071/api/generatePdf
+generatePdf: [POST] http://localhost:7071/generatePdf
 ```
 
 Hit that URL and you're ready! It doesn't do auto-reloads though.
@@ -65,12 +65,12 @@ The only available endpoint. All three fields (`user`, `presentation`, `email`) 
 You can generate a single PDF at a time.
 
 ```
-/POST http://localhost:7071/api/generatePdf
+/POST http://localhost:7071/generatePdf
 
 {
-	"user": "Some User",
-	"presentation": "Made a ton of GitHub repos",
-	"email": "1337brogrammer@winning.com"
+  "user": "Some User",
+  "presentation": "Made a ton of GitHub repos",
+  "email": "1337brogrammer@winning.com"
 }
 ```
 
