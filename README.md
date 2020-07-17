@@ -7,8 +7,9 @@ Why `pdf-lib` and not `[insert any other library]?`. Well, because some of the b
 To do this you'll need to:
 
 1. Deploy some storage to contain your custom fonts (Roboto included for demo purposes)
-2. Configure your function to use your new `STORAGE_ACCOUNT_KEY` and `AZURE_STORAGE_CONNECTION_STRING`
-3. Deploy the function
+2. Upload custom fonts
+3. Configure your function to use your new `STORAGE_ACCOUNT_KEY` and `AZURE_STORAGE_CONNECTION_STRING`
+4. Deploy the function
 
 **Stack**
 
@@ -17,6 +18,13 @@ To do this you'll need to:
 - [Webpack](https://webpack.js.org) for bundling and optimizing
 - [Babel](https://babeljs.io) for transpiling files
 - [Typescript](https://www.typescriptlang.org) so we can write better code
+
+## Prerequisites
+
+- Azure account
+- Logged in to Azure through environment
+- High enough credentials to create new function and storage resources
+- Serverless Framework installed on your system
 
 ## Install
 
@@ -86,6 +94,10 @@ Run `npm run deploy:storage` or `yarn deploy:storage`.
 
 **Always check the values/exports in shell scripts before running them!**
 
+## Upload fonts
+
+Run `npm run upload:fonts` or `yarn run deploy:fonts`. This will upload the `fonts/` folder to the new storage.
+
 ## Deploy function
 
 Run `npm run deploy` or `yarn deploy` or `sls deploy`.
@@ -94,9 +106,10 @@ Run `npm run deploy` or `yarn deploy` or `sls deploy`.
 
 ## Remove
 
-Run `sls remove` to remove the function stack.
+Run `npm run teardown` or `yarn run teardown`. This command does the following:
 
-Run `sh scripts/teardown.sh` to remove the storage for fonts and documents.
+- Runs `sls remove` to remove the function stack.
+- Runs `sh ./scripts/teardown.sh` to remove the storage for fonts and documents.
 
 ## References
 

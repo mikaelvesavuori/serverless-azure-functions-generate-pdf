@@ -9,7 +9,9 @@
     "watch": "tsc -w",
     "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
     "deploy": "sls deploy",
-    "deploy:storage": "sh ./setup.sh"
+    "deploy:storage": "sh ./scripts/setup.sh",
+    "upload:fonts": "sh ./scripts/upload-fonts.sh",
+    "teardown": "sls remove && sh ./scripts/teardown.sh"
   },
   "keywords": [
     "pdf",
