@@ -19,7 +19,8 @@ export async function createPdfDocument(
   document: Document,
   fonts: FontLoaded[]
 ) {
-  if (!document || !fonts) throw new Error('Missing docDefinition and/or document and/or fonts!');
+  if (!template || !document || !fonts)
+    throw new Error('Missing template and/or document and/or fonts!');
 
   // Setup
   const { fontSizes, colors, pageSize, pageOrientation } = template;
