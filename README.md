@@ -111,7 +111,7 @@ Run `npm run teardown` or `yarn run teardown`. This command does the following:
 - Runs `sls remove` to remove the function stack.
 - Runs `sh ./scripts/teardown.sh` to remove the storage for fonts and documents.
 
-### Arkit code structure map
+## Arkit code structure map
 
 ![Arkit code structure map](arkit.svg)
 
