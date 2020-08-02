@@ -1,27 +1,28 @@
-import { promises as fs } from 'fs';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 
-import { DocumentInterface } from '../Document/DocumentInterface';
-import { FontLoadedInterface } from '../Font/FontLoadedInterface';
-import { template } from '../pdf/template';
-const { fontSizes, colors, pageSize, pageOrientation } = template;
+import { Document } from '../../domain/Document/Document';
+import { Template } from '../../domain/Document/Template';
+import { FontLoaded } from '../../domain/Font/FontLoaded';
 
 /**
  * @description Use pdf-lib to create a PDF document
  * @param {object} template - Template data for generating document
- * @param {DocumentInterface} document - Document data that was passed in through request
- * @param {FontLoadedInterface[]} fonts - Array of fonts
+ * @param {Document} document - Document data that was passed in through request
+ * @param {FontLoaded[]} fonts - Array of fonts
  * @exports
  * @async
  * @function
  */
 export async function createPdfDocument(
-  docDefinition: object,
-  document: DocumentInterface,
-  fonts: FontLoadedInterface[]
+  template: Template,
+  document: Document,
+  fonts: FontLoaded[]
 ) {
+  if (!document || !fonts) throw new Error('Missing docDefinition and/or document and/or fonts!');
+
   // Setup
+  const { fontSizes, colors, pageSize, pageOrientation } = template;
   const pdfDoc = await PDFDocument.create();
   pdfDoc.registerFontkit(fontkit);
 

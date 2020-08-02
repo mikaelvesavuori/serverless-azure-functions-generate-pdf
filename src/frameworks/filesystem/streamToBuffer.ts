@@ -1,5 +1,3 @@
-//import * as fs from 'fs';
-
 /**
  * @description Stream content to disk
  * @param {ReadableStream} readableStream - Stream data
@@ -9,6 +7,8 @@
  * @function
  */
 export async function streamToBuffer(readableStream: any, localPath: string) {
+  if (!readableStream || !localPath) throw new Error('Missing readableStream or localPath!');
+
   return new Promise((resolve, reject) => {
     let buffer = Buffer.from([]);
 
@@ -17,7 +17,6 @@ export async function streamToBuffer(readableStream: any, localPath: string) {
     });
 
     readableStream.on('end', () => {
-      //fs.writeFileSync(localPath, buffer);
       resolve(buffer);
     });
 

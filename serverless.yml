@@ -17,7 +17,7 @@ package:
 
 functions:
   generatePdf:
-    handler: src/handlers/index.handler
+    handler: src/controllers/generatePdf.generatePdf
     events:
       - http: true
         x-azure-settings:

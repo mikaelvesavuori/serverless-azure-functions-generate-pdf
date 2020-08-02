@@ -7,5 +7,6 @@
  * @function
  */
 export async function uploadBlobToStorage(blockBlobClient: any, file: any) {
+  if (!blockBlobClient || !file) throw new Error('Missing block blob client or file!');
   return await blockBlobClient.upload(file, file.length);
 }

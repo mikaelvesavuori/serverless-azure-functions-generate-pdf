@@ -32,7 +32,7 @@ Install dependencies with `npm install` or `yarn add`.
 
 ## Configuration
 
-Located at `src/domain/config/config.ts`.
+Located at `src/config.ts`.
 
 You will need to provide `STORAGE_ACCOUNT_KEY` and `AZURE_STORAGE_CONNECTION_STRING` for your Azure Storage.
 
@@ -102,7 +102,7 @@ Run `npm run upload:fonts` or `yarn run deploy:fonts`. This will upload the `fon
 
 Run `npm run deploy` or `yarn deploy` or `sls deploy`.
 
-**Make sure you've put your STORAGE_ACCOUNT_KEY and AZURE_STORAGE_CONNECTION_STRING in src/domain/config/config.ts!**
+**Make sure you've put your STORAGE_ACCOUNT_KEY and AZURE_STORAGE_CONNECTION_STRING in src/config.ts!**
 
 ## Remove
 

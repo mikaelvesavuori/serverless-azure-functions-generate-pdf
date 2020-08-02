@@ -4,10 +4,13 @@ import {
   generateBlobSASQueryParameters
 } from '@azure/storage-blob';
 
-import { config } from '../../domain/config/config';
-const { CONTAINER_NAME, STORAGE_ACCOUNT_NAME, STORAGE_ACCOUNT_KEY, SAS_TTL_MINUTES } = config;
+import { Config } from '../../domain/Config/Config';
 
-export function generateSasUrl(blobName: string) {
+export function generateSasUrl(blobName: string, config: Config) {
+  if (!blobName || !config) throw new Error('Missing blob name or config!');
+
+  const { CONTAINER_NAME, STORAGE_ACCOUNT_NAME, STORAGE_ACCOUNT_KEY, SAS_TTL_MINUTES } = config;
+
   const sharedKeyCredential = new StorageSharedKeyCredential(
     STORAGE_ACCOUNT_NAME,
     STORAGE_ACCOUNT_KEY

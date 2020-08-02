@@ -1,4 +1,4 @@
-export interface FontInterface {
+export interface Font {
   name: String;
   path: String;
 }

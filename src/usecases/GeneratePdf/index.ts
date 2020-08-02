@@ -1,15 +1,14 @@
 import { BlobServiceClient } from '@azure/storage-blob';
 import { v4 as uuidv4 } from 'uuid';
 
-import { DocumentInterface } from '../../domain/Document/DocumentInterface';
+import { createPdfDocument } from '../../app/pdf/createPdfDocument';
+import { downloadFonts } from '../../frameworks/storage/downloadFonts';
+import { uploadBlobToStorage } from '../../frameworks/storage/uploadBlobToStorage';
+import { generateSasUrl } from '../../frameworks/storage/generateSasUrl';
 
-import { createPdfDocument } from '../../domain/pdf/createPdfDocument';
-import { downloadFonts } from '../../infra/storage/downloadFonts';
-import { uploadBlobToStorage } from '../../infra/storage/uploadBlobToStorage';
-import { generateSasUrl } from '../../infra/storage/generateSasUrl';
-
-import { template } from '../../domain/pdf/template';
-import { config } from '../../domain/config/config';
+import { Document } from '../../domain/Document/Document';
+import { template } from '../../app/pdf/template';
+import { config } from '../../config';
 const { CONTAINER_NAME, AZURE_STORAGE_CONNECTION_STRING, FONT_FILES, STORAGE_DOCS_FOLDER } = config;
 
 const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
@@ -23,7 +22,9 @@ const containerClient = blobServiceClient.getContainerClient(CONTAINER_NAME);
  * @param {string} document.email - User's contact email address
  * @exports
  */
-export async function generatePdf(document: DocumentInterface) {
+export async function generatePdfUseCase(document: Document) {
+  if (!document) throw new Error('No document!');
+
   let fonts: any = null;
 
   // Attempt to download all fonts from remote storage to local disk
@@ -56,7 +57,7 @@ export async function generatePdf(document: DocumentInterface) {
 
   // Attempt to create public short-lived SAS (Shared Access Signature) for file
   try {
-    url = generateSasUrl(blobName);
+    url = generateSasUrl(blobName, config);
   } catch (error) {
     console.error(error);
   }

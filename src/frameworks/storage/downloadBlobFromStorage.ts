@@ -9,6 +9,7 @@ import { streamToBuffer } from '../filesystem/streamToBuffer';
  * @function
  */
 export async function downloadBlobFromStorage(blockBlobClient: any, localPath: string) {
+  if (!blockBlobClient || !localPath) throw new Error('Missing block blob client or localPath!');
   const blockBlobResponse = await blockBlobClient.download(0);
   return await streamToBuffer(blockBlobResponse.readableStreamBody, localPath);
 }
